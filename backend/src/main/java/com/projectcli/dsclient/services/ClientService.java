@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projectcli.dsclient.dto.ClientDTO;
 import com.projectcli.dsclient.entities.Client;
 import com.projectcli.dsclient.repositories.ClientRepository;
+import com.projectcli.dsclient.services.exceptions.ResourceNotFoundException;
 
 
 @Service
@@ -31,7 +32,7 @@ public class ClientService {
 	@Transactional(readOnly = true)
  	public ClientDTO findById(Long id) {
  		Optional<Client> obj = repository.findById(id);
- 		Client entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+ 		Client entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
  		return new ClientDTO(entity);
  	}
 	
@@ -44,5 +45,21 @@ public class ClientService {
  		entity.setBirthdate(dto.getBirthDate());
  		entity = repository.save(entity);
  		return new ClientDTO(entity);
+ 	}
+	
+	@Transactional
+ 	public ClientDTO update(Long id, ClientDTO dto) {
+ 		try {
+ 			Client entity = repository.getOne(id);
+ 			entity.setName(dto.getName());
+ 			entity.setCpf(dto.getCpf());
+ 			entity.setEmail(dto.getEmail());
+ 			entity.setBirthdate(dto.getBirthDate());
+ 			entity = repository.save(entity);
+ 			return new ClientDTO(entity);
+ 		}
+ 		catch (EntityNotFoundException e) {
+ 			throw new ResourceNotFoundException("Id not found " + id);
+ 		}
  	}
 }
