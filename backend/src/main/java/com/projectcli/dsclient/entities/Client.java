@@ -19,19 +19,22 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@Column(unique = true)
+	private String email;
 	private String cpf;
 	
-	@Column(name = "birthdate")
-	private Instant birthdate;
+	@Column(name = "birthDate")
+	private Instant birthDate;
 	
 	public Client() {
 	}
 
-	public Client(Long id, String name, String cpf, Instant birthdate) {
+	public Client(Long id, String name, String cpf, Instant birthDate) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
-		this.birthdate = birthdate;
+		this.birthDate = birthDate;
 	}
 
 	public Long getId() {
@@ -59,11 +62,11 @@ public class Client implements Serializable {
 	}
 
 	public Instant getBirthdate() {
-		return birthdate;
+		return birthDate;
 	}
 
 	public void setBirthdate(Instant birthdate) {
-		this.birthdate = birthdate;
+		this.birthDate = birthdate;
 	}
 
 	@Override
