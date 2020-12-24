@@ -9,5 +9,4 @@ public class DsclientApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DsclientApplication.class, args);
 	}
-
 }
