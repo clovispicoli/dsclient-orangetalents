@@ -30,10 +30,11 @@ public class Client implements Serializable {
 	public Client() {
 	}
 
-	public Client(Long id, String name, String cpf, Instant birthDate) {
+	public Client(Long id, String name, String cpf, String email, Instant birthDate) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
+		this.email = email;
 		this.birthDate = birthDate;
 	}
 
@@ -59,6 +60,14 @@ public class Client implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Instant getBirthdate() {
