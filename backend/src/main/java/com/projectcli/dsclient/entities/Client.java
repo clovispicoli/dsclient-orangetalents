@@ -24,6 +24,8 @@ public class Client implements Serializable {
 	
 	@Column(unique = true)
 	private String email;
+	
+	@Column(unique = true)
 	private String cpf;
 	
 	@Column(name = "birthDate")
